@@ -1,23 +1,18 @@
 import type { Config } from "tailwindcss";
+import baseConfig from "@repo/tailwind-config/web";
+import { fontFamily } from "tailwindcss/defaultTheme";
 
-const config: Config = {
-  content: [
-    "./pages/**/*.{js,ts,jsx,tsx,mdx}",
-    "./components/**/*.{js,ts,jsx,tsx,mdx}",
-    "./app/**/*.{js,ts,jsx,tsx,mdx}",
-  ],
+export default {
+  // We need to append the path to the UI package to the content array so that
+  // those classes are included correctly.
+  content: [...baseConfig.content, "../../packages/ui/**/*.{ts,tsx}"],
+  presets: [baseConfig],
   theme: {
     extend: {
-      colors: {
-        background: "var(--background)",
-        foreground: "var(--foreground)",
-      },
       fontFamily: {
-        sans: ["var(--font-geist-sans)"],
-        mono: ["var(--font-geist-mono)"],
+        sans: ["var(--font-geist-sans)", ...fontFamily.sans],
+        mono: ["var(--font-geist-mono)", ...fontFamily.mono],
       },
     },
   },
-  plugins: [],
-};
-export default config;
+} satisfies Config;
