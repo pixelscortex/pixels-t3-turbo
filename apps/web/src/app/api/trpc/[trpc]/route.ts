@@ -1,7 +1,7 @@
 import { appRouter, createTRPCContext } from "@repo/api";
 import { fetchRequestHandler } from "@trpc/server/adapters/fetch";
 
-import { createSupabaseAction } from "~/lib/supabase/server-actions";
+import { createSupabaseRouterHandler } from "~/lib/supabase/api";
 
 /**
  * Configure basic CORS headers
@@ -23,11 +23,11 @@ export const OPTIONS = () => {
 };
 
 const handler = async (req: Request) => {
-  const supabase = await createSupabaseAction();
+  const supabase = await createSupabaseRouterHandler();
 
   const {
-    data: { session },
-  } = await supabase.auth.getSession();
+    data: { user },
+  } = await supabase.auth.getUser();
 
   const response = await fetchRequestHandler({
     endpoint: "/api/trpc",
@@ -36,7 +36,7 @@ const handler = async (req: Request) => {
     createContext: () =>
       createTRPCContext({
         headers: req.headers,
-        session: session,
+        session: user,
       }),
     onError({ error, path }) {
       console.error(`>>> tRPC Error on '${path}'`, error);

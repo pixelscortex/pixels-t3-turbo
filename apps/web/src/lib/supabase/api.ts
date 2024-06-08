@@ -1,10 +1,12 @@
 import type { CookieOptions } from "@supabase/ssr";
 import { cookies } from "next/headers";
 import { createServerClient } from "@supabase/ssr";
+import { type SupabaseClient } from "@supabase/supabase-js";
 
-export async function createSupabaseAction<DatabaseType>() {
+export function createSupabaseRouterHandler<T>(): SupabaseClient<T> {
   const cookieStore = cookies();
-  return createServerClient<DatabaseType>(
+
+  return createServerClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
     {
