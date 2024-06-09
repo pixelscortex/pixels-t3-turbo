@@ -1,3 +1,4 @@
+import { auth } from "@clerk/nextjs/server";
 import { appRouter, createTRPCContext } from "@repo/api";
 import { fetchRequestHandler } from "@trpc/server/adapters/fetch";
 
@@ -23,11 +24,7 @@ export const OPTIONS = () => {
 };
 
 const handler = async (req: Request) => {
-  const supabase = await createSupabaseRouterHandler();
-
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+  const user = auth();
 
   const response = await fetchRequestHandler({
     endpoint: "/api/trpc",
@@ -36,7 +33,7 @@ const handler = async (req: Request) => {
     createContext: () =>
       createTRPCContext({
         headers: req.headers,
-        session: user,
+        uuid: user.userId,
       }),
     onError({ error, path }) {
       console.error(`>>> tRPC Error on '${path}'`, error);

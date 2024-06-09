@@ -1,25 +1,24 @@
-import type { User } from "@repo/auth";
 import { DatabaseSchema, db } from "@repo/db/client";
 import { initTRPC, TRPCError } from "@trpc/server";
 import superjson from "superjson";
 import { ZodError } from "zod";
 
 export type TRPCContext = {
-  session: User | null;
+  uuid: string | null;
   db: DatabaseSchema;
 };
 
 export const createTRPCContext = (opts: {
   headers: Headers;
-  session: User | null;
+  uuid: string | null;
 }): TRPCContext => {
-  const session = opts.session;
+  const uuid = opts.uuid;
   const source = opts.headers.get("x-trpc-source") ?? "unknown";
 
-  console.log(">>> tRPC Request from", source, "by", session);
+  console.log(">>> tRPC Request from", source, "by", uuid);
 
   return {
-    session,
+    uuid,
     db,
   };
 };
@@ -42,13 +41,10 @@ export const createTRPCRouter = t.router;
 export const publicProcedure = t.procedure;
 
 export const protectedProcedure = t.procedure.use(({ ctx, next }) => {
-  if (!ctx.session) {
+  if (!ctx.uuid) {
     throw new TRPCError({ code: "UNAUTHORIZED" });
   }
   return next({
-    ctx: {
-      // infers the `session` as non-nullable
-      session: { ...ctx.session, user: ctx.session },
-    },
+    ctx,
   });
 });
