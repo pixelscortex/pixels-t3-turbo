@@ -12,6 +12,16 @@ export default {
       fontFamily: {
         poppins: "var(--font-poppins)",
       },
+      colors: {
+        brand: {
+          primary: "hsl(var(--brand-primary))",
+          secondary: "hsl(var(--brand-secondary))",
+        },
+      },
+      height: {
+        nav: "var(--navbar-height)",
+        mnav: "calc(100vh - var(--navbar-height))",
+      },
     },
   },
 } satisfies Config;

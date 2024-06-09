@@ -10,7 +10,9 @@
     --card-foreground: 240 10% 3.9%;
     --popover: 0 0% 100%;
     --popover-foreground: 240 10% 3.9%;
-    --primary: 240 5.9% 10%;
+    --brand-primary: 72 82% 60%;
+    --brand-secondary: 277 73% 41%;
+    --primary: 87 67% 24%;
     --primary-foreground: 0 0% 98%;
     --secondary: 240 4.8% 95.9%;
     --secondary-foreground: 240 5.9% 10%;
@@ -23,16 +25,19 @@
     --border: 240 5.9% 90%;
     --input: 240 5.9% 90%;
     --ring: 240 5.9% 10%;
-    --radius: 1rem;
+    --radius: 0.5rem;
+    --navbar-height: 3.5rem;
   }
 
   .dark {
-    --background: 240 10% 3.9%;
+    --background: 71 11% 5%;
     --foreground: 0 0% 98%;
     --card: 240 10% 3.9%;
     --card-foreground: 0 0% 98%;
     --popover: 240 10% 3.9%;
     --popover-foreground: 0 0% 98%;
+    --brand-primary: 72 82% 60%;
+    --brand-secondary: 277 73% 41%;
     --primary: 0 0% 98%;
     --primary-foreground: 240 5.9% 10%;
     --secondary: 240 3.7% 15.9%;

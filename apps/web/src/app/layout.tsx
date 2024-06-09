@@ -1,13 +1,7 @@
 import type { Metadata } from "next";
 import React from "react";
 import { Poppins } from "next/font/google";
-import {
-  ClerkProvider,
-  SignedIn,
-  SignedOut,
-  SignInButton,
-  UserButton,
-} from "@clerk/nextjs";
+import { ClerkProvider } from "@clerk/nextjs";
 
 import "~/app/globals.css";
 
@@ -35,16 +29,16 @@ export default function RootLayout({
     <ClerkProvider>
       <html lang="en" suppressHydrationWarning>
         <body className={`${poppins.variable} font-poppins`}>
-          <SignedOut>
-            {" "}
-            <SignInButton />{" "}
-          </SignedOut>{" "}
-          <SignedIn>
-            {" "}
-            <UserButton />{" "}
-          </SignedIn>
           <ThemeProvider>
-            <Providers>{children}</Providers>
+            <Providers>
+              {/* <SignedOut>
+                <SignInButton />
+              </SignedOut>
+              <SignedIn>
+                <UserButton />
+              </SignedIn> */}
+              {children}
+            </Providers>
           </ThemeProvider>
         </body>
       </html>
