@@ -27,6 +27,7 @@
     "@trpc/react-query": "11.0.0-rc.394",
     "@trpc/server": "11.0.0-rc.394",
     "next": "^14.2.3",
+    "next-themes": "^0.3.0",
     "react": "18.3.1",
     "react-dom": "18.3.1",
     "react-hook-form": "^7.51.5",

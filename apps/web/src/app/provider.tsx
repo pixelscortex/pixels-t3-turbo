@@ -11,6 +11,7 @@ const Providers = ({ children }: { children: React.ReactNode }) => {
     <TRPCReactProvider>
       {children}
       <Toaster />
+
       {process.env.NODE_ENV !== "production" && (
         <ReactQueryDevtools initialIsOpen={false} />
       )}
