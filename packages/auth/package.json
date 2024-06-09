@@ -1,0 +1,39 @@
+{
+  "name": "@repo/auth",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "add": "pnpm dlx shadcn-ui add",
+    "clean": "rm -rf .turbo node_modules",
+    "format": "prettier --check . --ignore-path ../../.gitignore",
+    "lint": "eslint",
+    "typecheck": "tsc --noEmit --emitDeclarationOnly false",
+    "ui-add": "pnpm dlx shadcn-ui add && prettier src --write --list-different"
+  },
+  "exports": {
+    "./*": [
+      "./src/*.tsx",
+      "./src/*.ts"
+    ]
+  },
+  "dependencies": {
+    "@clerk/elements": "^0.6.0",
+    "@icons-pack/react-simple-icons": "^9.5.0",
+    "@repo/ui": "workspace:*",
+    "lucide-react": "^0.390.0"
+  },
+  "devDependencies": {
+    "@repo/eslint-config": "workspace:*",
+    "@repo/prettier-config": "workspace:*",
+    "@repo/typescript-config": "workspace:*",
+    "@repo/tailwind-config": "workspace:*",
+    "@types/react": "^18.3.3",
+    "typescript": "^5.4.5",
+    "tailwindcss": "^3.4.4"
+  },
+  "peerDependencies": {
+    "react": "18.3.1"
+  },
+  "prettier": "@repo/prettier-config"
+}
