@@ -5,7 +5,6 @@ import { Button } from "@repo/ui/button";
 
 export const Navbar = () => {
   const { userId } = auth();
-
   return (
     <nav className="h-nav bg-red sticky top-0 z-10 border-b">
       <div className="container flex h-full items-center justify-between rounded-b-lg bg-background/90 backdrop-blur-sm">
@@ -21,7 +20,7 @@ export const Navbar = () => {
         <div className="flex items-center gap-1 ">
           <ul className="mx-2 flex items-center justify-center gap-2">
             <li>
-              <Link href={"/protected"}>Protected</Link>
+              <Link href={"#"}>Profile</Link>
             </li>
             <li>
               <Link href={"#"}>Settings</Link>

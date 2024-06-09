@@ -5,8 +5,6 @@ import { ClerkProvider } from "@clerk/nextjs";
 
 import "~/app/globals.css";
 
-import { AxiomWebVitals } from "next-axiom";
-
 import Providers from "./provider";
 import ThemeProvider from "./theme-provider";
 
@@ -33,7 +31,6 @@ export default function RootLayout({
         <body className={`${poppins.variable} font-poppins`}>
           <ThemeProvider>
             <Providers>
-              <AxiomWebVitals />
               {/* <SignedOut>
                 <SignInButton />
               </SignedOut>
