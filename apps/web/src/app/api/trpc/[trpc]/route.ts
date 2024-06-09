@@ -1,6 +1,7 @@
 import { auth } from "@clerk/nextjs/server";
 import { appRouter, createTRPCContext } from "@repo/api";
 import { fetchRequestHandler } from "@trpc/server/adapters/fetch";
+import { AxiomRequest, withAxiom } from "next-axiom";
 
 import { createSupabaseRouterHandler } from "~/lib/supabase/api";
 
@@ -23,7 +24,7 @@ export const OPTIONS = () => {
   return response;
 };
 
-const handler = async (req: Request) => {
+const handler = withAxiom(async (req: AxiomRequest) => {
   const user = auth();
 
   const response = await fetchRequestHandler({
@@ -42,6 +43,6 @@ const handler = async (req: Request) => {
 
   setCorsHeaders(response);
   return response;
-};
+});
 
 export { handler as GET, handler as POST };
