@@ -5,8 +5,15 @@ import { ClerkProvider } from "@clerk/nextjs";
 
 import "~/app/globals.css";
 
+import dynamic from "next/dynamic";
+
+import { PHProvider } from "./posthog-provider";
 import Providers from "./provider";
 import ThemeProvider from "./theme-provider";
+
+const PostHogPageView = dynamic(() => import("./post-hog-page-view"), {
+  ssr: false,
+});
 
 const poppins = Poppins({
   weight: ["200", "300", "400", "500", "600", "700", "800", "900"],
@@ -28,19 +35,22 @@ export default function RootLayout({
   return (
     <ClerkProvider>
       <html lang="en" suppressHydrationWarning>
-        <body className={`${poppins.variable} font-poppins`}>
-          <ThemeProvider>
-            <Providers>
-              {/* <SignedOut>
+        <PHProvider>
+          <body className={`${poppins.variable} font-poppins`}>
+            <PostHogPageView />
+            <ThemeProvider>
+              <Providers>
+                {/* <SignedOut>
                 <SignInButton />
               </SignedOut>
               <SignedIn>
                 <UserButton />
               </SignedIn> */}
-              {children}
-            </Providers>
-          </ThemeProvider>
-        </body>
+                {children}
+              </Providers>
+            </ThemeProvider>
+          </body>
+        </PHProvider>
       </html>
     </ClerkProvider>
   );
