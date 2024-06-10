@@ -2,6 +2,8 @@ import Link from "next/link";
 import { SignInButton, UserButton, UserProfile } from "@clerk/nextjs";
 import { auth } from "@clerk/nextjs/server";
 import { Button } from "@repo/ui/button";
+import { Sheet, SheetContent, SheetTrigger } from "@repo/ui/sheet";
+import { MoreHorizontal } from "lucide-react";
 
 export const Navbar = () => {
   const { userId } = auth();
@@ -17,7 +19,42 @@ export const Navbar = () => {
           </h1>
         </Link>
 
-        <div className="flex items-center gap-1 ">
+        <div className="flex items-center gap-2 sm:hidden">
+          {userId ? (
+            <div className="mx-2 flex ">
+              <UserButton afterSignOutUrl="/" />
+            </div>
+          ) : (
+            <SignInButton>
+              <Button variant={"outline"}>Sign in</Button>
+            </SignInButton>
+          )}
+          <Sheet>
+            <SheetTrigger asChild>
+              <Button variant={"brand"} size={"icon"}>
+                <MoreHorizontal />
+              </Button>
+            </SheetTrigger>
+            <SheetContent className="flex flex-col justify-between gap-2">
+              <div className="flex flex-col gap-4">
+                <ul className="mx-2 flex flex-col gap-2">
+                  <li>
+                    <Link href={"#"}>Profile</Link>
+                  </li>
+                  <li>
+                    <Link href={"#"}>Settings</Link>
+                  </li>
+                  <li>
+                    <Link href={"#"}>Dashboard</Link>
+                  </li>
+                </ul>
+              </div>
+              <Button variant={"brand"}>Call to Action</Button>
+            </SheetContent>
+          </Sheet>
+        </div>
+
+        <div className="hidden items-center gap-1 sm:flex">
           <ul className="mx-2 flex items-center justify-center gap-2">
             <li>
               <Link href={"#"}>Profile</Link>
