@@ -3,10 +3,10 @@
 
 import { type NextRequest } from "next/server";
 import { getAuth } from "@clerk/nextjs/server";
-import { appRouter, createTRPCContext } from "@repo/api";
 import { fetchRequestHandler } from "@trpc/server/adapters/fetch";
 
 import { env } from "~/env";
+import { appRouter, createTRPCContext } from "@repo/api";
 
 /**
  * This wraps the `createTRPCContext` helper and provides the required context for the tRPC API when
@@ -28,7 +28,8 @@ const handler = (req: NextRequest) =>
     createContext: () => createContext(req),
     onError:
       env.NODE_ENV === "development"
-        ? ({ path, error }) => {
+        ? 
+          ({ path, error }) => {
             console.error(
               `❌ tRPC failed on ${path ?? "<no-path>"}: ${error.message}`,
             );
