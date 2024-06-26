@@ -22,4 +22,4 @@ const createContext = cache(async () => {
   });
 });
 
-export const api = createCaller(createContext);
+export const server = createCaller(createContext);
