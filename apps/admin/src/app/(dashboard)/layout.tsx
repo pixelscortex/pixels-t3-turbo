@@ -3,9 +3,8 @@ import { SignOutButton } from "@clerk/nextjs";
 import { auth } from "@clerk/nextjs/server";
 import { Button } from "@repo/ui/button";
 
-import { Navbar } from "~/components/navbar";
 import Sidebar from "~/components/sidebar";
-import { api } from "~/trpc/server";
+import { server } from "~/trpc/server";
 
 export default async function AppLayout({
   children,
@@ -13,7 +12,7 @@ export default async function AppLayout({
   children: React.ReactNode;
 }) {
   try {
-    const { isAuthorized } = await api.auth.isAuthorized();
+    const { isAuthorized } = await server.auth.isAuthorized();
 
     console.log("isAuthorized", isAuthorized);
 
@@ -33,11 +32,13 @@ export default async function AppLayout({
     }
 
     return (
-      <main className="flex flex-col">
-        <Navbar />
-        <div className="flex">
-          <Sidebar />
-          {children}
+      <main className="flex h-full w-full">
+        <Sidebar />
+
+        <div className="flex grow p-4">
+          <section className=" flex flex-1 flex-col gap-3 rounded-lg border p-4">
+            {children}
+          </section>
         </div>
       </main>
     );
